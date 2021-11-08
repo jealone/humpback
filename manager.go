@@ -127,6 +127,9 @@ func (ro *GoroutineManager) Apply(f func(ctx context.Context) error) {
 		ro.Logger().Printf("goroutine manager has closed, please check the status")
 	default:
 		go func() {
+
+			ro.wg.Add(1)
+
 			defer func() {
 				ro.Finish()
 			}()
